@@ -1,58 +1,176 @@
-# create-svelte
+# svelte-achievements-bar
 
-Everything you need to build a Svelte library, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+`svelte-achievements-bar` is a customizable Svelte component that displays a progress bar with icons and text, indicating the progress of various achievements. The component utilizes the `lucide-svelte` library for icons.
 
-Read more about creating a library [in the docs](https://kit.svelte.dev/docs/packaging).
+## Technologies Used
 
-## Creating a project
+- **Svelte**: The front-end framework for building the component.
+- **lucide-svelte**: A library for using Lucide icons in Svelte components.
+- **Vite**: For module bundling and handling dynamic imports.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Installation
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+To use the `svelte-achievements-bar` component in your project, you need to install it along with its dependencies:
 
 ```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+npm install svelte-achievements-bar lucide-svelte
 ```
 
-Everything inside `src/lib` is part of your library, everything inside `src/routes` can be used as a showcase or preview app.
+## Usage
 
-## Building
+Here is a basic example of how to use the `svelte-achievements-bar` component in your Svelte application.
 
-To build your library:
+### App.svelte
 
-```bash
-npm run package
+```svelte
+<script>
+	import AchievementsBar from 'svelte-achievements-bar';
+
+	let achievements = [
+		{ icon: 'skull', text: 'Start' },
+		{ icon: 'album', text: 'Intermediate' },
+		{ icon: 'usb', text: 'Advanced' }
+	];
+
+	let progress = 1.3; // This means the user has completed the first achievement
+</script>
+
+<AchievementsBar {achievements} {progress} />
 ```
 
-To create a production version of your showcase app:
+### Props
 
-```bash
-npm run build
+- `achievements`: An array of achievement objects. Each object should contain an `icon` and `text` property.
+  - `icon`: The name of the icon to display (from Lucide).
+  - `text`: The text to display under the icon.
+- `barHeight`: The height of the progress bar. Default is `'20px'`.
+- `iconSize`: The size of the icons. Default is `'40px'`.
+- `textSize`: The size of the text under the icons. Default is `'16px'`.
+- `iconStroke`: The stroke width of the icons. Default is `1.5`.
+- `iconColor`: The color of the icons. Default is `'#050505'`.
+- `bgColor`: The background color of the progress bar. Default is `'#8C93A8'`.
+- `mainColor`: The color of the progress bar and the lit icons. Default is `'#4CAF50'`.
+- `progress`: The current progress as a number from 0 to `(achievements.length - 1)`.
+
+## Examples
+
+### Example with Custom Styling
+
+```svelte
+<script>
+	import AchievementsBar from 'svelte-achievements-bar';
+
+	let achievements = [
+		{ icon: 'skull', text: 'Start' },
+		{ icon: 'album', text: 'Intermediate' },
+		{ icon: 'usb', text: 'Advanced' }
+	];
+	let progress = 2;
+</script>
+
+<AchievementsBar
+	{achievements}
+	{progress}
+	barHeight="30px"
+	iconSize="50px"
+	textSize="18px"
+	iconStroke="2"
+	iconColor="#ffffff"
+	bgColor="#333"
+	mainColor="#ff6347"
+/>
 ```
 
-You can preview the production build with `npm run preview`.
+## Explanation
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+- **Dynamic Icon Loading**: The icons are dynamically imported using Vite's module bundling. This allows for efficient loading and reduces the initial load time.
+- **Progress Bar**: The progress bar visually represents the user's progress through the achievements.
+- **Lit Icons**: Icons change their background color based on the user's progress to indicate completed achievements.
+- **Customizable Styles**: You can customize the height of the bar, the size and color of the icons, the size of the text, and the colors used for the background and progress bar.
 
-## Publishing
+## Styling
 
-Go into the `package.json` and give your package the desired name through the `"name"` option. Also consider adding a `"license"` field and point it to a `LICENSE` file which you can create from a template (one popular option is the [MIT license](https://opensource.org/license/mit/)).
+The component uses CSS variables for styling, which allows for easy customization:
 
-To publish your library to [npm](https://www.npmjs.com):
+- `--bar-height`: Height of the progress bar.
+- `--bg-color`: Background color of the progress bar and icons.
+- `--main-color`: Color of the progress bar and lit icons.
+- `--icon-size`: Size of the icons.
+- `--text-size`: Size of the text.
 
-```bash
-npm publish
+```css
+<style>
+  .progress-bar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .progress-bar-wrapper {
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .progress-bar {
+    background-color: var(--bg-color);
+    border-radius: 2vw;
+    height: var(--bar-height);
+    width: 100%;
+    position: relative;
+  }
+
+  .progress {
+    background-color: var(--main-color);
+    height: 100%;
+    width: 0;
+    transition: width 0.3s;
+    border-radius: 2vw;
+  }
+
+  .achievements {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    position: absolute;
+  }
+
+  .achievement {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+  }
+
+  .icon {
+    padding: calc(var(--icon-size) / 2.5);
+    border-radius: 50%;
+    background-color: var(--bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s;
+  }
+
+  .icon.lit {
+    background-color: var(--main-color);
+  }
+
+  .text {
+    font-size: var(--text-size);
+    position: absolute;
+    margin-top: calc(var(--icon-size) * 0.8);
+  }
+</style>
 ```
+
+## Contributions
+
+Contributions are welcome! Please open an issue or submit a pull request on GitHub.
+
+## Support
+
+If you encounter any issues or have any questions, feel free to open an issue on GitHub.
