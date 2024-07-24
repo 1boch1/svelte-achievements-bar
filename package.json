@@ -1,7 +1,7 @@
 {
 	"name": "svelte-achievements-bar",
 	"version": "0.0.2",
-	"license": "MIT",
+	"license": "ISC",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run package",
