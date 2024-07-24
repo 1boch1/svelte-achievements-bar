@@ -1,7 +1,7 @@
 {
 	"name": "svelte-achievements-bar",
 	"version": "0.0.1",
-	"license": "Apache License 2.0",
+	"license": "MIT",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run package",
@@ -57,5 +57,28 @@
 	"dependencies": {
 		"lucide-svelte": "^0.414.0"
 	},
-	"packageManager": "pnpm@9.6.0+sha512.38dc6fba8dba35b39340b9700112c2fe1e12f10b17134715a4aa98ccf7bb035e76fd981cf0bb384dfa98f8d6af5481c2bef2f4266a24bfa20c34eb7147ce0b5e"
+	"packageManager": "pnpm@9.6.0+sha512.38dc6fba8dba35b39340b9700112c2fe1e12f10b17134715a4aa98ccf7bb035e76fd981cf0bb384dfa98f8d6af5481c2bef2f4266a24bfa20c34eb7147ce0b5e",
+	"description": "Svelte component that displays a progress bar with icons and texts, indicating the progress of various achievements",
+	"main": "eslint.config.js",
+	"directories": {
+		"test": "tests"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/1boch1/svelte-achievements-bar.git"
+	},
+	"keywords": [
+		"svelte",
+		"UI",
+		"progress-bar",
+		"icons",
+		"rewards-bar",
+		"achievements-bar",
+		"icons-progress-bar"
+	],
+	"author": "1boch1",
+	"bugs": {
+		"url": "https://github.com/1boch1/svelte-achievements-bar/issues"
+	},
+	"homepage": "https://github.com/1boch1/svelte-achievements-bar#readme"
 }
