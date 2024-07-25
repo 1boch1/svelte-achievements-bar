@@ -48,6 +48,7 @@ Here is a basic example of how to use the `svelte-achievements-bar` component in
 - `textSize`: The size of the text under the icons. Default is `'16px'`.
 - `iconStroke`: The stroke width of the icons. Default is `1.5`.
 - `iconColor`: The color of the icons. Default is `'#050505'`.
+- `iconLitColor`: The color of the lit icons (line color).
 - `bgColor`: The background color of the progress bar. Default is `'#8C93A8'`.
 - `mainColor`: The color of the progress bar and the lit icons. Default is `'#4CAF50'`.
 - `progress`: The current progress as a number from 0 to `(achievements.length - 1)`.
