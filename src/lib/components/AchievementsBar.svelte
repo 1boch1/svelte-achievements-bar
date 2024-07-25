@@ -2,18 +2,86 @@
 	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';
 
+	/**
+	 * Array of achievement objects. Each object should have an `icon` property
+	 * specifying the name of the lucid-svelte desired icon (without extension) and a `text` property
+	 * with the achievement description.
+	 * @type {Array<{ icon: string, text: string }>}
+	 */
 	export let achievements = [];
-	export let barHeight = '20px';
-	export let iconSize = '40px';
-	export let textSize = '16px';
-	export let iconStroke = '1.5';
-	export let iconColor = '#050505';
-	export let bgColor = '#8C93A8'; // Background color of the bar
-	export let mainColor = '#4CAF50'; // Color of the progress and lit icon
-	export let progress = 0; // Progress is a number from 0 to (achievements.length - 1)
 
+	/**
+	 * Height of the progress bar.
+	 * @type {string}
+	 * @default '20px'
+	 */
+	export let barHeight = '20px';
+
+	/**
+	 * Size of the achievement icons.
+	 * @type {string}
+	 * @default '40px'
+	 */
+	export let iconSize = '40px';
+
+	/**
+	 * Font size of the achievement text.
+	 * @type {string}
+	 * @default '16px'
+	 */
+	export let textSize = '16px';
+
+	/**
+	 * Stroke width of the icons.
+	 * @type {number}
+	 * @default 1.5
+	 */
+	export let iconStroke = '1.5';
+
+	/**
+	 * Default color of the icons.
+	 * @type {string}
+	 * @default '#050505'
+	 */
+	export let iconColor = '#050505';
+
+	/**
+	 * Color of the lit icons (line color, not background).
+	 * @type {string}
+	 * @default '#00AF50'
+	 */
+	export let iconLitColor = '#00AF50';
+
+	/**
+	 * Background color of the progress bar.
+	 * @type {string}
+	 * @default '#8C93A8'
+	 */
+	export let bgColor = '#8C93A8';
+
+	/**
+	 * Main color of the progress and icon background.
+	 * @type {string}
+	 * @default '#4CAF50'
+	 */
+	export let mainColor = '#4CAF50';
+
+	/**
+	 * Progress value, a number from 0 to (achievements.length - 1).
+	 * @type {number}
+	 * @default 0
+	 */
+	export let progress = 0;
+
+	// Store for imported icons
 	let importedIcons = writable([]);
 
+	/**
+	 * Load the icons dynamically based on the achievements array.
+	 * If an icon fails to load, null is pushed to the icons array.
+	 * @async
+	 * @function loadIcons
+	 */
 	async function loadIcons() {
 		const icons = [];
 
@@ -36,6 +104,7 @@
 		importedIcons.set(icons);
 	}
 
+	// Load icons when component mounts
 	onMount(() => {
 		loadIcons();
 	});
@@ -64,7 +133,7 @@
 								<svelte:component
 									this={icons[index]}
 									size={iconSize}
-									color={iconColor}
+									color={progress >= index ? iconLitColor : iconColor}
 									strokeWidth={iconStroke}
 								/>
 							</div>
@@ -126,7 +195,7 @@
 	}
 
 	.icon {
-		padding: calc(var(--icon-size) / 2.5);
+		padding: calc(var(--icon-size) / 2.4);
 		border-radius: 50%;
 		background-color: var(--bg-color); /* Background color for the icon circle */
 		display: flex;
