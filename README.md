@@ -2,6 +2,10 @@
 
 `svelte-achievements-bar` is a customizable Svelte component that displays a progress bar with icons and text, indicating the progress of various achievements. The component utilizes the `lucide-svelte` library for icons.
 
+## Result
+
+![IMG_4998](https://github.com/user-attachments/assets/2660e445-c2b8-4fd4-bc99-92c0ca63d6e9)
+
 ## Technologies Used
 
 - **Svelte**: The front-end framework for building the component.
