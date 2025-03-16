@@ -1,6 +1,6 @@
 {
 	"name": "svelte-achievements-bar",
-	"version": "1.3.0",
+	"version": "1.5.0",
 	"license": "ISC",
 	"scripts": {
 		"dev": "vite dev",
